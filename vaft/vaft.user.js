@@ -169,7 +169,7 @@
                                         if (qualityMenu) {
                                             qualityMenu.click();
                                         }
-                                        var lowQuality = document.querySelectorAll('input[data-a-target="tw-radio"');
+                                        var lowQuality = document.querySelectorAll('input[data-a-target="tw-radio"]');
                                         if (lowQuality) {
                                             var qualityToSelect = lowQuality.length - 2;
                                             if (e.data.value != null) {
@@ -303,7 +303,7 @@
                     return new Promise(function(resolve, reject) {
                         var processAfter = async function(response) {
                             if (response.status == 200) {
-                                encodingsM3u8 = await response.text();
+                                const encodingsM3u8 = await response.text();
                                 var streamInfo = StreamInfos[channelName];
                                 if (streamInfo == null) {
                                     StreamInfos[channelName] = streamInfo = {};
