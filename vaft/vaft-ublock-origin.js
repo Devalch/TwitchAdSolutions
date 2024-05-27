@@ -2,7 +2,10 @@
 /// alias twitch-videoad
 
 (function () {
+    console.log("vaft loaded");
+
     if (/(^|\.)twitch\.tv$/.test(document.location.hostname) === false) {
+        console.log("twitch not found");
         return;
     }
     //This stops Twitch from pausing the player when in another tab and an ad shows.
