@@ -1,7 +1,8 @@
 /// vaft-ublock-origin.js
 /// alias twitch-videoad
-
-(function () {
+/// world ISOLATED
+/// dependency run-at.fn
+function block_ad () {
     if (/(^|\.)twitch\.tv$/.test(document.location.hostname) === false) {
         return;
     }
@@ -880,4 +881,4 @@
     }
 
     hookFetch();
-})();
+}
