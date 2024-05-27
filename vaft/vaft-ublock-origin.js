@@ -1,7 +1,7 @@
 /// vaft-ublock-origin.js
 /// alias twitch-videoad
-
-(function () {
+/// dependency run-at.fn
+function adblocker () {
     console.log("vaft loaded");
 
     if (/(^|\.)twitch\.tv$/.test(document.location.hostname) === false) {
@@ -878,4 +878,4 @@
     }
 
     hookFetch();
-})();
+}
