@@ -1,71 +1,76 @@
+(function () {
+    'use strict';
+
 /// vaft-ublock-origin.js
 /// alias twitch-videoad
-function block_ad () {
-    if (/(^|\.)twitch\.tv$/.test(document.location.hostname) === false) {
-        return;
-    }
-    //This stops Twitch from pausing the player when in another tab and an ad shows.
-    try {
-        Object.defineProperty(document, 'visibilityState', {
-            get() {
-                return 'visible';
-            }
-        });
-        Object.defineProperty(document, 'hidden', {
-            get() {
-                return false;
-            }
-        });
-        const block = e => {
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-        };
-        const process = e => {
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            //This corrects the background tab buffer bug when switching to the background tab for the first time after an extended period.
-            doTwitchPlayerTask(false, false, true, false, false);
-        };
-        document.addEventListener('visibilitychange', block, true);
-        document.addEventListener('webkitvisibilitychange', block, true);
-        document.addEventListener('mozvisibilitychange', block, true);
-        document.addEventListener('hasFocus', block, true);
-        if (/Firefox/.test(navigator.userAgent)) {
-            Object.defineProperty(document, 'mozHidden', {
-                get() {
-                    return false;
-                }
-            });
-        } else {
-            Object.defineProperty(document, 'webkitHidden', {
-                get() {
-                    return false;
-                }
-            });
+    (function () {
+        if (/(^|\.)twitch\.tv$/.test(document.location.hostname) === false) {
+            return;
         }
-    } catch (err) {}
-    function declareOptions(scope) {
-        scope.AdSignifier = 'stitched';
-        scope.ClientID = 'kimne78kx3ncx6brgo4mv6wki5h1ko';
-        scope.ClientVersion = 'null';
-        scope.ClientSession = 'null';
-        scope.PlayerType2 = 'embed'; //Source
-        scope.PlayerType3 = 'site'; //Source
-        scope.PlayerType4 = 'autoplay'; //360p
-        scope.CurrentChannelName = null;
-        scope.UsherParams = null;
-        scope.WasShowingAd = false;
-        scope.GQLDeviceID = null;
-        scope.IsSquadStream = false;
-        scope.StreamInfos = [];
-        scope.StreamInfosByUrl = [];
-        scope.MainUrlByUrl = [];
-        scope.EncodingCacheTimeout = 60000;
-        scope.ClientIntegrityHeader = null;
-        scope.AuthorizationHeader = null;
-    }
+        //This stops Twitch from pausing the player when in another tab and an ad shows.
+        try {
+            Object.defineProperty(document, 'visibilityState', {
+                get() {
+                    return 'visible';
+                }
+            });
+            Object.defineProperty(document, 'hidden', {
+                get() {
+                    return false;
+                }
+            });
+            const block = e => {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+            };
+            const process = e => {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                //This corrects the background tab buffer bug when switching to the background tab for the first time after an extended period.
+                doTwitchPlayerTask(false, false, true, false, false);
+            };
+            document.addEventListener('visibilitychange', block, true);
+            document.addEventListener('webkitvisibilitychange', block, true);
+            document.addEventListener('mozvisibilitychange', block, true);
+            document.addEventListener('hasFocus', block, true);
+            if (/Firefox/.test(navigator.userAgent)) {
+                Object.defineProperty(document, 'mozHidden', {
+                    get() {
+                        return false;
+                    }
+                });
+            } else {
+                Object.defineProperty(document, 'webkitHidden', {
+                    get() {
+                        return false;
+                    }
+                });
+            }
+        } catch (err) {
+        }
+
+        function declareOptions(scope) {
+            scope.AdSignifier = 'stitched';
+            scope.ClientID = 'kimne78kx3ncx6brgo4mv6wki5h1ko';
+            scope.ClientVersion = 'null';
+            scope.ClientSession = 'null';
+            scope.PlayerType2 = 'embed'; //Source
+            scope.PlayerType3 = 'site'; //Source
+            scope.PlayerType4 = 'autoplay'; //360p
+            scope.CurrentChannelName = null;
+            scope.UsherParams = null;
+            scope.WasShowingAd = false;
+            scope.GQLDeviceID = null;
+            scope.IsSquadStream = false;
+            scope.StreamInfos = [];
+            scope.StreamInfosByUrl = [];
+            scope.MainUrlByUrl = [];
+            scope.EncodingCacheTimeout = 60000;
+            scope.ClientIntegrityHeader = null;
+            scope.AuthorizationHeader = null;
+        }
 
     declareOptions(window);
     let twitchWorkers = [];
